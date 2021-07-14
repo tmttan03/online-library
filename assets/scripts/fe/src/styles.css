@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+    margin: 0;
+    font-family: var(--bs-font-sans-serif);
+    font-size: .8125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #f8f8fb;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.dropdown-item, .btn , .form-control{
+    font-size: .8125rem;
+}
+
+.rounded-circle{
+    object-fit: cover;
+}
+
+@media (min-width: 992px)
+{
+    body[data-layout=horizontal][data-topbar=light] .topnav {
+        background-color: #34c38f!important;
+    }
+
+    .navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+        justify-content: center!important;
+    }
+
+}
+
+.topnav .navbar-nav .nav-link {
+    font-size: 14px;
+    position: relative;
+    padding: 1rem 1.3rem;
+    color: #545a6d;
+}
+
+.topnav .mm-active>i, .topnav .mm-active {
+    color: #ffffff!important;
+}

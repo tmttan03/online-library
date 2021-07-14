@@ -1,0 +1,63 @@
+<div class="dashboard--panel">
+    <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+        <div class="input-group mb-3">
+            <input type="text" formControlName="search_text" class="form-control" placeholder="Search Title" aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit"><i class="la la-search"></i></button>
+            </div>
+            <div class="input-group-append" ngbDropdown>
+                <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle><i class="la la-filter"></i> Filter</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+                    <a class="dropdown-item" href="." ngbDropdownItem (click)="filterClick($event, 'all')">All</a>
+                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'available')">Available</a>
+                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'checked out')">Checked Out</a>
+                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'digital copy')">Digital Copy</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="mt-4">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Book</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Owner</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let book of books_list" (click)="rowClicked(book)">
+                    <th scope="row">
+                        <p class="font-weight-bold">{{ book.title | titlecase }} </p>
+                        <small class="text-muted">by: {{ book.author | titlecase }}</small>
+                    </th>
+                    <td><p class="">{{ book.location | titlecase }}</p></td>
+                    <td>
+                        <p class="badge badge-pill badge-sm text-block" 
+                            [ngClass]="{'badge-danger': book.status==='checked out', 
+                            'badge-success': book.status==='available'}" style="color: white; font-size: 12px;"
+                            *ngIf="book.is_digital_copy !== true">
+                            {{ book.status | titlecase  }}
+                        </p>
+
+                        <p class="badge badge-pill badge-sm badge-warning text-block" style="color: white; font-size: 12px;"
+                            *ngIf="book.is_digital_copy === true">
+                            Digital Copy
+                        </p>
+                    </td>
+                    <td><p class="">{{ book.owner.full_name | titlecase }}</p></td>
+                    <td>
+                        <button type="button" 
+                                class="btn btn-secondary btn-sm"
+                                (click)="updateBook($event, book)">Update</button> 
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="dashboard--panel">
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non dictum libero. Vestibulum sit amet varius nunc. Sed luctus nisl sed auctor fermentum. Fusce porttitor, orci pharetra dictum laoreet, leo nulla malesuada odio, non dictum ante leo vel magna. Nullam sed dignissim quam. </p>
+  <form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+      <div>
+          <label>Title:</label>
+          <input class="form-control" formControlName="title" type="text">
+      </div>
+
+      <div>
+          <label>Author:</label>
+          <input class="form-control" formControlName="author" type="text">
+      </div>
+
+      <div>
+        <label>Location:</label>
+        <input class="form-control" formControlName="location" type="text">
+      </div>
+
+      <div>
+        <div>
+          <input type="checkbox" formControlName="is_digital_copy">
+          Is Digital Copy
+        </div>
+      </div>
+
+      <br>
+      <button class="btn btn-primary" type="submit" [disabled]="this.disable">Save</button>
+  </form>
+</div>

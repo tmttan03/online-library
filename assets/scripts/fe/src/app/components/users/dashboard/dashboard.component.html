@@ -1,0 +1,50 @@
+<div class="dashboard--panel">
+    <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+        <div class="input-group mb-3">
+            <input type="text" formControlName="search_text" class="form-control" placeholder="Search Title" aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit"><i class="la la-search"></i></button>
+            </div>
+            <div class="input-group-append" ngbDropdown>
+                <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle><i class="la la-filter"></i> Filter</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+                    <a class="dropdown-item" href="." ngbDropdownItem (click)="filterClick($event, 'all')">All</a>
+                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'available')">Available</a>
+                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'checked out')">Checked Out</a>
+                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'digital copy')">Digital Copy</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="mt-5">
+        <div class="row">
+            <div class="col-sm-3" *ngFor="let book of books_list" (click)="rowClicked(book)">
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <img src="static/scripts/fe/src/assets/images/no-cover-img.jpg" class="card-img-top mb-3" alt="...">
+
+                        <span class="badge badge-pill badge-sm text-block" 
+                            [ngClass]="{'badge-danger': book.status==='checked out', 
+                            'badge-success': book.status==='available'}" style="color: white; font-size: 12px;"
+                            *ngIf="book.is_digital_copy !== true">
+                            {{ book.status | titlecase  }}
+                        </span>
+
+                        <span class="badge badge-pill badge-sm badge-warning text-block" style="color: white; font-size: 12px;"
+                            *ngIf="book.is_digital_copy === true">
+                            Digital Copy
+                        </span>
+
+                        <h5 class="card-title mb-0">
+                            {{ book.title | titlecase }}
+                        </h5>
+                        <small class="text-muted mt-0">by: {{ book.author | titlecase }} </small>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

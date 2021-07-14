@@ -1,0 +1,69 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" style="line-height: 0.9">
+        <b>{{ book.title }}  
+
+          <span class="badge badge-pill badge-sm" 
+            [ngClass]="{'badge-danger': book.status==='checked out', 
+            'badge-success': book.status==='available'}" style="color: white; font-size: 12px;"
+            *ngIf="book.is_digital_copy !== true">
+            {{ book.status | titlecase  }}
+          </span>
+
+          <span class="badge badge-pill badge-sm badge-warning" style="color: white; font-size: 12px;"
+            *ngIf="book.is_digital_copy === true">
+            Digital Copy
+          </span>
+        </b>
+        <br>
+        <small class="text-muted">by {{book.author | titlecase }}</small>
+      </h3>
+      <button type="button" class="close" (click)="close()" >&times;</button>
+    </div>
+    <div class="modal-body">
+      <p><b>Description:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non dictum libero. Vestibulum sit amet varius nunc. Sed luctus nisl sed auctor fermentum ...</p>
+      <p><b>Owned by:</b> {{ book.owner.full_name | titlecase }}</p>
+      <hr>
+      
+      <h6>Comments ({{ comments_list.length }}):</h6>
+      <div class="comment-section" style="max-height: 200px; overflow: auto;">
+        <div class="d-flex align-items-center pt-2 pb-3 border-bottom" *ngFor="let comment of comments_list" >
+          <img class="img-sm rounded-circle" src="static/scripts/fe/src/assets/images/no-prof-img.png" alt="profile">
+          <div class="ml-3" style="line-height: 0.5;">
+            <h6 class="mb-0">
+
+              <table>
+                <tr>
+                  <td class="pb-0 pt-0">{{ comment.user.full_name | titlecase }} </td>
+                  <td class="pb-0 pt-0"><small class="text-muted pl-2" style="font-size: 10px; margin-top: 2px;">{{ comment.date_created | date:'medium' }}</small></td>
+                  <td class="pb-0 pt-0"><p></p></td>
+                  <td class="pb-0 pt-0">
+                    <button class="close float-right" type="button" (click)="deleteClick(comment.id)" [hidden]="comment.user.id!==this.authService.user_id">&times;</button>
+                  </td>
+                </tr>
+              </table>
+            </h6>
+            <small class="text-muted mb-0">{{ comment.message }}</small> <br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+      <input type="hidden" formControlName="book_id">
+      <input type="hidden" formControlName="user">
+      <div class="input-group">
+        <textarea class="form-control"  formControlName="message" placeholder="Write a comment..."></textarea>
+        <div class="input-group-append">
+          <button class="btn btn-secondary btn-sm" type="submit" [disabled]="this.disable"><i class="la la-paper-plane"></i></button>
+        </div>
+      </div>
+    </form>
+  
+    <div class="modal-footer" [hidden]="book.owner.id===this.authService.user_id || book.is_digital_copy === true">
+      <button type="button" class="btn btn-primary btn-block" (click)="borrowBook()" [hidden]="book.status==='checked out'">Check Out</button>
+      <button type="button" class="btn btn-warning btn-block" (click)="returnBook()" [hidden]='!this.isCheckedOut'>Return Book</button>
+    </div>
+  </div>
+</div>

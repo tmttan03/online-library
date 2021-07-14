@@ -1,0 +1,46 @@
+<div class="container">
+    <h3 class="section-title mb-3">Register</h3>
+
+    <form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+
+        <div class="form-group">
+            <label>First Name:</label>
+            <input class="form-control" formControlName="first_name" type="text">
+            <span [hidden]="form.valid('first_name')" class="text-danger"><p><small>First name is required.</small></p></span>
+        </div>
+
+        <div class="form-group">
+            <label>Last Name:</label>
+            <input class="form-control" formControlName="last_name" type="text">
+            <span [hidden]="form.valid('last_name')" class="text-danger"><p><small>Last name is required.</small></p></span>
+        </div>
+
+        <div class="form-group">
+            <label>Email:</label>
+            <input class="form-control" formControlName="email" (input)="emailInputChange($event.target.value)" type="text">
+            <span *ngIf="form.hasError('email', 'required')" class="text-danger"><p><small>Email is required.</small></p></span>
+            <span *ngIf="form.hasError('email', 'email')" class="text-danger"><p><small>Invalid email format.</small></p></span>
+            <span *ngIf="this.hasEmailError" class="text-danger"><p><small>{{ this.emailErr }}</small></p></span>
+        </div>
+
+        <div class="form-group">
+            <label>Password:</label>
+            <input class="form-control" formControlName="password" (input)="passwordInputChange($event.target.value)" type="password">
+            <span *ngIf="this.mismatchedPassword" class="text-danger"><p><small>{{ this.passwordErr }}</small></p></span>
+            <span [hidden]="form.valid('password')" class="text-danger"><p><small>Password is required.</small></p></span>
+        </div>
+
+        <div class="form-group">
+            <label>Confirm Password:</label>
+            <input class="form-control" formControlName="confirm_password" (input)="passwordInputChange($event.target.value)" type="password">
+            <span *ngIf="this.mismatchedPassword" class="text-danger"><p><small>{{ this.passwordErr }}</small></p></span>
+            <span [hidden]="form.valid('confirm_password')" class="text-danger"><p><small>Password is required.</small></p></span>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit" [disabled]="this.disable">Register</button>
+    </form>
+
+    <div class="form-group text-center mt-5">
+        <p><a (click)='redirectLogin()'>Back to Home</a></p>
+    </div>
+</div>
