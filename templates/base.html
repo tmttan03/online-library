@@ -1,0 +1,33 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Book Shelf</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link href="{% static 'scripts/fe/dist/fe/assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'scripts/fe/dist/fe/assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'scripts/fe/dist/fe/assets/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body data-topbar="light" data-layout="horizontal">
+  <app-root></app-root>
+
+  <script src="{% static 'scripts/fe/dist/fe/assets/libs/jquery/jquery.min.js'%}"></script>
+  <script src="{% static 'scripts/fe/dist/fe/assets/libs/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'scripts/fe/dist/fe/assets/libs/metismenu/metisMenu.min.js'%}"></script>
+  <script src="{% static 'scripts/fe/dist/fe/assets/libs/simplebar/simplebar.min.js'%}"></script>
+  <script src="{% static 'scripts/fe/dist/fe/assets/libs/node-waves/waves.min.js'%}"></script>
+  <script src="{% static 'scripts/fe/dist/fe/assets/js/app.js'%}"></script>
+
+  <script type="text/javascript" src="{% static 'scripts/fe/dist/fe/runtime.js' %}"></script>
+  <script type="text/javascript" src="{% static 'scripts/fe/dist/fe/polyfills.js' %}"></script>
+  <script type="text/javascript" src="{% static 'scripts/fe/dist/fe/styles.js' %}"></script>
+  <script type="text/javascript" src="{% static 'scripts/fe/dist/fe/vendor.js' %}"></script>
+  <script type="text/javascript" src="{% static 'scripts/fe/dist/fe/main.js' %}"></script>
+</body>
+</html>
