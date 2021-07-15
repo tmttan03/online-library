@@ -8,6 +8,7 @@ from .api import (
 )
 
 urlpatterns = [
+
     #/api/users/ - Get all the users
     path('', Users.as_view({
         'get': 'get',
