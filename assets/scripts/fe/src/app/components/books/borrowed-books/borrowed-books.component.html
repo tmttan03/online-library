@@ -1,65 +1,81 @@
-<div class="dashboard--panel">
-    <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
-        <div class="input-group mb-3">
-            <input type="text" formControlName="search_text" class="form-control" placeholder="Search Title" aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit"><i class="la la-search"></i></button>
-            </div>
-            <div class="input-group-append" ngbDropdown>
-                <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle><i class="la la-filter"></i> Filter</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
-                    <a class="dropdown-item" href="." ngbDropdownItem (click)="filterClick($event, 'all')">All</a>
-                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'available')">Returned</a>
-                    <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'checked out')">Checked Out</a>
-                </div>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Borrowed Books</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="/dashboard/">Home</a></li>
+                    <li class="breadcrumb-item active">Borrowed Books</li>
+                </ol>
             </div>
         </div>
-    </form>
+    </div>
+</div>
 
-    <div class="mt-4">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Book</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Owner</th>
-                    <th scope="col">Checkout Date</th>
-                    <th scope="col">Return Date</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of books_list" (click)="rowClicked(item.book)">
-                    <th scope="row">
-                        <p class="font-weight-bold">{{ item.book.title | titlecase }} </p>
-                        <small class="text-muted">by: {{ item.book.author | titlecase }}</small>
-                    </th>
-                    <td><p class="">{{ item.book.location | titlecase }}</p></td>
-                    <td>
-                        <p class="badge badge-pill badge-info"  *ngIf="item.returned_date !== null"style="color: white;">
-                            Returned
-                        </p>
-        
-                        <p class="badge badge-pill badge-danger"  *ngIf="item.returned_date === null"style="color: white;">
-                            Checked Out
-                        </p>
-                    </td>
-                    <td><p class="">{{ item.book.owner.full_name | titlecase }}</p></td>
-                    <td><p class="">{{ item.checked_out_date | date:"medium" }}</p></td>
-                    <td>
-                        <button type="button" 
-                        class="btn btn-secondary btn-sm"  
-                        [hidden]="item.returned_date !== null" 
-                        (click)="returnBook($event, item)">
-                            Return Book
-                        </button> 
-
-                        <p class="" [hidden]="item.returned_date === null">{{ item.returned_date | date:"medium" }}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="">
+            <div class="table-responsive">
+                <table class="table project-list-table table-nowrap align-middle table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Book</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Owner</th>
+                            <th scope="col">Checkout Date</th>
+                            <th scope="col">Return Date</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of books_list" (click)="rowClicked(item.book)">
+                            <th scope="row">
+                                <p class="font-weight-bold mb-0">{{ item.book.title | titlecase }} </p>
+                                <small class="text-muted">by:
+                                    <span *ngFor="let author of item.book.authors; let last = last;">
+                                        {{ author.name }}<span *ngIf="!last">,</span>
+                                    </span>
+                                </small>
+                            </th>
+                            <td><p class="">{{ item.book.category | titlecase }}</p></td>
+                            <td><p class="">{{ item.book.location | titlecase }}</p></td>
+                            <td>
+                                <p class="badge text-block"
+                                    [ngClass]="{'badge-soft-info': item.book.status==='checked out',
+                                    'badge-soft-success': item.book.status==='available',
+                                    'badge-soft-danger': (item.book.status==='damaged'|| item.book.status==='lost')}">
+                                    {{ item.book.status | titlecase  }}
+                                </p>
+                            </td>
+                            <td>
+                                <p class="badge badge-pill badge-info"  *ngIf="item.returned_date !== null"style="color: white;">
+                                    Returned
+                                </p>
+                                <p class="badge badge-pill badge-danger"  *ngIf="item.returned_date === null"style="color: white;">
+                                    Checked Out
+                                </p>
+                            </td>
+                            <td><p class="">{{ item.book.owner.full_name | titlecase }}</p></td>
+                            <td><p class="">{{ item.checked_out_date | date:"medium" }}</p></td>
+                            <td>
+                                <button type="button" 
+                                class="btn btn-secondary btn-sm"  
+                                [hidden]="item.returned_date !== null" 
+                                (click)="returnBook($event, item)">
+                                    Return Book
+                                </button> 
+                                <p class="" [hidden]="item.returned_date === null">{{ item.returned_date | date:"medium" }}
+                            </td>
+                        </tr>
+                        <tr *ngIf="books_list?.length == 0">
+                            <td colspan="9">No Borrowed Books</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

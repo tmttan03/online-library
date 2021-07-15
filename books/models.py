@@ -53,7 +53,7 @@ class Book(models.Model):
     status = models.CharField(default=AVAILABLE, max_length=20, choices=STATUSES)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     authors = models.ManyToManyField(Author, blank=True)
-    thumbnails = models.ImageField(upload_to='books', default='/default/no-img.jpg')
+    thumbnail = models.ImageField(upload_to='books', default='/default/no-img.jpg')
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 

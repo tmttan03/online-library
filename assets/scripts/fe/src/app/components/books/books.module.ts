@@ -5,6 +5,7 @@ import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.componen
 import { OwnedBooksComponent } from './owned-books/owned-books.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthorsComponent } from './authors/authors.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     ReactiveFormsModule,
   ],
-  declarations: [AddBookComponent, BorrowedBooksComponent, OwnedBooksComponent]
+  declarations: [AddBookComponent, BorrowedBooksComponent, OwnedBooksComponent, AuthorsComponent]
 })
 export class BooksModule { }

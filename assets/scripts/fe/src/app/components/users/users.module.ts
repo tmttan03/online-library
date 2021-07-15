@@ -4,6 +4,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LibraryComponent } from './library/library.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     ReactiveFormsModule,
   ],
-  declarations: [SettingsComponent, DashboardComponent]
+  declarations: [SettingsComponent, DashboardComponent, LibraryComponent]
 })
 export class UsersModule { }

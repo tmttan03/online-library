@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { 
-  BOOKS, OWNED_BOOKS, ADD_BOOK, 
-  CHECKOUT_BOOK, 
+  BOOKS, 
+  OWNED_BOOK, 
+  ADD_BOOK, 
+  UPDATE_BOOK,
+  CHECKOUT_BOOK,
+  RETURN_BOOK, 
+  AUTHORS, 
   COMMENTS,
-  ADD_COMMENT,
+  ADD_COMMENT, 
   DELETE_COMMENT,
-  IS_CHECKED_OUT,
   BORROWED_BOOKS,
-  RETURN_BOOK,
-  UPDATE_BOOK} from '../../constants/api.constants'
+  IS_CHECKED_OUT,
+} from '../../constants/api.constants'
+
+
 import { Books } from '../../models/book.model'
 
 @Injectable({
@@ -21,17 +27,15 @@ export class BooksService {
     private http: HttpClient
   ) { }
 
-
   getAllBooks() {
     return this.http.get(BOOKS);
   }
-
   getBorrowedBooks() {
     return this.http.get(BORROWED_BOOKS);
   }
 
   getOwnedBooks() {
-    return this.http.get(OWNED_BOOKS);
+    return this.http.get(OWNED_BOOK);
   }
 
   addBook(data: Books) {
@@ -44,6 +48,10 @@ export class BooksService {
 
   checkoutBook(data) {
     return this.http.post(CHECKOUT_BOOK, data);
+  }
+
+  getAllAuthors(){
+    return this.http.get(AUTHORS);
   }
 
   getAllComments(book_id) {

@@ -44,5 +44,26 @@ body {
 }
 
 .topnav .mm-active>i, .topnav .mm-active {
-    color: #ffffff!important;
+    color: #fff!important;
+}
+
+.topnav .navbar-nav .dropdown.active>a {
+    color: #34c38f;
+    background-color: transparent;
+}
+
+.avatar-md {
+    height: 12rem;
+    width: 8rem;
+}
+
+.thumbnail{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.h-90{
+    height: 90%!important;
 }

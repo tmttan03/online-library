@@ -2,6 +2,7 @@ import { NavContent } from "src/app/commons/utils/layout.utils";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginRequired } from "src/app/commons/utils/security.utils";
 import { SettingsComponent } from "./settings/settings.component";
+import { LibraryComponent } from "./library/library.component";
 
 
 export const USER_STATES: Object[] = [
@@ -9,6 +10,12 @@ export const USER_STATES: Object[] = [
         name : 'dashboard',
         url  : '/dashboard/',
         views:  NavContent(DashboardComponent),
+        onEnter: LoginRequired
+    },
+    {
+        name : 'library',
+        url  : '/library/',
+        views:  NavContent(LibraryComponent),
         onEnter: LoginRequired
     },
     {

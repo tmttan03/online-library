@@ -38,7 +38,7 @@ class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ('id', 'title', 'plot', 'category', 'status', 'location',
-                  'thumbnails', 'authors', 'owner', 'date_created', 'date_updated')
+                  'thumbnail', 'authors', 'owner', 'date_created', 'date_updated')
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)

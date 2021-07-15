@@ -15,12 +15,12 @@ urlpatterns = [
     }), name="owned_books"),
 
     #/api/books/add-book/ - Add Book
-    path('add-book/', BookViewSet.as_view({
+    path('add/', BookViewSet.as_view({
         'post': 'add_book',
     }), name="add_book"),
 
     #/api/books/update-book/ - Update book
-    path('update-book/', BookViewSet.as_view({
+    path('update/', BookViewSet.as_view({
         'put': 'update_book',
     }), name="update_book"),
 
@@ -47,18 +47,18 @@ urlpatterns = [
     }), name='delete_comment'),
 
     ### Checkout ###
-    #/api/books/borrowed-books/ - Get All Borrowed Books
-    path('borrowed-books/', CheckoutViewSet.as_view({
+    #/api/books/borrowed/ - Get All Borrowed Books
+    path('borrowed/', CheckoutViewSet.as_view({
         'get': 'get_borrowed_books',
     }), name="borrowed_books"),
 
-    #/api/books/checkout-book/ - Checkout A Book
-    path('checkout-book/', CheckoutViewSet.as_view({
+    #/api/books/checkout/ - Checkout A Book
+    path('checkout/', CheckoutViewSet.as_view({
         'post': 'checkout_book'
     }), name='checkout_book'),
 
-    #/api/books/return-book/ - Return A Book
-    path('return-book/', CheckoutViewSet.as_view({
+    #/api/books/return/ - Return A Book
+    path('return/', CheckoutViewSet.as_view({
         'post': 'return_book'
     }), name='return_book'),
 
