@@ -30,7 +30,7 @@ class Book(models.Model):
     PAPERBACK = 'paperback'
     DIGITAL_COPY = 'digital copy'
 
-    CATEGORIES = (
+    TYPES = (
         (HARDCOVER, 'Hardcover'),
         (PAPERBACK, 'Paperback'),
         (DIGITAL_COPY, 'Digital Copy')
@@ -48,7 +48,7 @@ class Book(models.Model):
 
     title = models.CharField(max_length=255)
     plot = models.TextField(max_length=255, blank=True)
-    category = models.CharField(default=HARDCOVER, max_length=20, choices=CATEGORIES)
+    type = models.CharField(default=HARDCOVER, max_length=20, choices=TYPES)
     location = models.CharField(default=EXACTUS_OFFICE, max_length=30, choices=LOCATIONS)
     status = models.CharField(default=AVAILABLE, max_length=20, choices=STATUSES)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)

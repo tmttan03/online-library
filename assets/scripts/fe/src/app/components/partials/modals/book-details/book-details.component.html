@@ -1,41 +1,47 @@
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content">
-    <div class="modal-header">
-      <h3 class="modal-title" style="line-height: 0.9">
-        <b>{{ book.title }}  
-
-          <span class="badge badge-pill badge-sm" 
-            [ngClass]="{'badge-danger': book.status==='checked out', 
-            'badge-success': book.status==='available'}" style="color: white; font-size: 12px;"
-            *ngIf="book.is_digital_copy !== true">
-            {{ book.status | titlecase  }}
+    <div class="modal-header mt-2">
+      <h6 class="modal-title" style="line-height: 1.2">
+        <b>{{ book.title }}</b> <br>
+        <small class="text-muted font-size-11">by
+          <span *ngFor="let author of book.authors; let last = last;">
+            {{ author.name }}<span *ngIf="!last">,</span>
           </span>
-
-          <span class="badge badge-pill badge-sm badge-warning" style="color: white; font-size: 12px;"
-            *ngIf="book.is_digital_copy === true">
-            Digital Copy
-          </span>
-        </b>
-        <br>
-        <small class="text-muted">by {{book.author | titlecase }}</small>
-      </h3>
+        </small>
+      </h6>
       <button type="button" class="close" (click)="close()" >&times;</button>
     </div>
     <div class="modal-body">
-      <p><b>Description:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non dictum libero. Vestibulum sit amet varius nunc. Sed luctus nisl sed auctor fermentum ...</p>
-      <p><b>Owned by:</b> {{ book.owner.full_name | titlecase }}</p>
+      <p>{{ book.plot }}</p>
+      <table>
+        <tr>
+          <td class="pb-2 pt-0"><b>Type:</b> {{ book.type | titlecase }}</td>
+          <td class="pb-2 pt-0 pl-2"><b>Location:</b> {{ book.location | titlecase }} </td>
+        </tr>
+        <tr>
+        <td class="pb-2 pt-0">
+          <b>Status:</b>
+          <span class="badge font-size-11"
+            [ngClass]="{'badge-soft-info': book.status==='checked out',
+            'badge-soft-success': book.status==='available',
+            'badge-soft-danger': (book.status==='damaged'|| book.status==='lost')}">
+            {{ book.status | titlecase  }}
+          </span>
+        </td>
+        <td class="pb-2 pt-0 pl-2"><b>Book Owned by:</b> {{ book.owner.full_name | titlecase }}</td>
+        </tr>
+      </table>
       <hr>
-      
-      <h6>Comments ({{ comments_list.length }}):</h6>
+      <p>Comments <span *ngIf='comments_list'>({{ comments_list.length }}):</span></p>
+
       <div class="comment-section" style="max-height: 200px; overflow: auto;">
-        <div class="d-flex align-items-center pt-2 pb-3 border-bottom" *ngFor="let comment of comments_list" >
-          <img class="img-sm rounded-circle" src="static/scripts/fe/src/assets/images/no-prof-img.png" alt="profile">
+        <div class="d-flex align-items-center pt-2 pb-3 border-bottom" *ngFor="let comment of comments_list?.reverse()" >
+          <img class="img-sm rounded-circle header-profile-user" src="{{ comment.user.avatar }}" alt="profile">
           <div class="ml-3" style="line-height: 0.5;">
             <h6 class="mb-0">
-
               <table>
                 <tr>
-                  <td class="pb-0 pt-0">{{ comment.user.full_name | titlecase }} </td>
+                  <td class="pb-0 pt-0 font-size-12">{{ comment.user.full_name | titlecase }} </td>
                   <td class="pb-0 pt-0"><small class="text-muted pl-2" style="font-size: 10px; margin-top: 2px;">{{ comment.date_created | date:'medium' }}</small></td>
                   <td class="pb-0 pt-0"><p></p></td>
                   <td class="pb-0 pt-0">
@@ -50,20 +56,20 @@
       </div>
     </div>
 
-    <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+    <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)" [hidden]="book.status === 'lost' || book.status === 'damaged' ">
       <input type="hidden" formControlName="book_id">
       <input type="hidden" formControlName="user">
       <div class="input-group">
-        <textarea class="form-control"  formControlName="message" placeholder="Write a comment..."></textarea>
+        <textarea class="form-control"  formControlName="message" placeholder="Write a comment..." rows="4"></textarea>
         <div class="input-group-append">
-          <button class="btn btn-secondary btn-sm" type="submit" [disabled]="this.disable"><i class="la la-paper-plane"></i></button>
+          <button class="btn btn-secondary btn-sm" type="submit" [disabled]="this.disable"><i class="bx bx-send"></i></button>
         </div>
       </div>
     </form>
-  
-    <div class="modal-footer" [hidden]="book.owner.id===this.authService.user_id || book.is_digital_copy === true">
-      <button type="button" class="btn btn-primary btn-block" (click)="borrowBook()" [hidden]="book.status==='checked out'">Check Out</button>
-      <button type="button" class="btn btn-warning btn-block" (click)="returnBook()" [hidden]='!this.isCheckedOut'>Return Book</button>
+
+    <div class="modal-footer" [hidden]="book.owner.id===this.authService.user_id || book.status==='lost' || book.status==='damaged'">
+      <button type="button" class="btn btn-success waves-effect waves-light btn-block btn-block" (click)="borrowBook()" [hidden]="book.status==='checked out'">Check Out</button>
+      <button type="button" class="btn btn-warning waves-effect waves-light btn-block btn-block" (click)="returnBook()" [hidden]='!this.isCheckedOut'>Return Book</button>
     </div>
   </div>
 </div>

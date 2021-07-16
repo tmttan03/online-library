@@ -104,7 +104,7 @@ export class BookDetailsComponent extends SimpleModalComponent<ConfirmModel, boo
     if (valid) {
       this.booksService.addComment(value).subscribe(
         data => {
-          this.comments_list.unshift(data);
+          this.comments_list.push(data);
           this.intializeForm();
         }, error => {
           console.log(error);

@@ -3,13 +3,16 @@
     <h3 class="section-title mb-3">Login</h3>
 
     <div *ngIf="hasDeactivated" class="alert alert-warning">
-        <p>Your account has been deactivated. Your personal data will be deleted within 48 hours.</p>
+        Your account has been deactivated. Your personal data will be deleted within 48 hours.
     </div>
     <div *ngIf="new" class="alert alert-success">
-        <p>Successfully created your account</p>
+        Successfully created your account
     </div>
     <form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
-        <span [hidden]="!form.err" class="text-danger">Invalid Email/Password. Please try again.</span>
+
+        <div [hidden]="!form.err"  class="alert alert-danger">
+            Invalid Email/Password. Please try again.
+        </div>
 
         <div class="form-group">
             <label>Email:</label>

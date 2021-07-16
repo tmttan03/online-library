@@ -5,3 +5,44 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-xl-4 col-sm-6" *ngFor="let book of books_list" (click)="rowClicked(book)">
+        <div class="card h-90">
+            <div class="card-body">
+                <div class="media">
+                    <div class="avatar-md me-4">
+                        <span class="avatar-title bg-light text-danger font-size-16">
+                            <img src="{{ book.thumbnail }}" class="thumbnail">
+                        </span>
+                    </div>
+
+                    <div class="media-body overflow-hidden">
+                        <h5 class="font-size-15">{{ book.title | titlecase }}</h5>
+                        <p>by
+                            <span *ngFor="let author of book.authors; let last = last;">
+                                {{ author.name }}<span *ngIf="!last">,</span>
+                            </span>
+                        </p>
+                        <p class="text-muted mb-4">{{ book.plot| slice:0:100 }} ...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="px-4 py-3 border-top">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-3">
+                        <span class="badge font-size-11" 
+                            [ngClass]="{'badge-soft-info': book.status==='checked out',
+                            'badge-soft-success': book.status==='available',
+                            'badge-soft-danger': (book.status==='damaged'|| book.status==='lost')}">
+                            {{ book.status | titlecase  }}
+                        </span>
+                    </li>
+                    <li class="list-inline-item me-3">
+                        <i class="bx bx-calendar me-1"></i> {{ book.date_created | date:"fullDate" }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

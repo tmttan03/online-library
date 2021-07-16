@@ -14,11 +14,11 @@ class BookAdmin(admin.ModelAdmin):
     ordering = ('date_created',)
     filter_horizontal = ('authors',)
     readonly_fields = ('date_created', 'date_updated')
-    search_fields = ('title', 'status', 'location', 'category',)
+    search_fields = ('title', 'status', 'location', 'type',)
     list_display = ('title',
                     'plot',
                     'status',
-                    'category',
+                    'type',
                     'location',
                     'owner',
                     'date_created',

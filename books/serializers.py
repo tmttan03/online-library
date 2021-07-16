@@ -37,7 +37,7 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-        fields = ('id', 'title', 'plot', 'category', 'status', 'location',
+        fields = ('id', 'title', 'plot', 'type', 'status', 'location',
                   'thumbnail', 'authors', 'owner', 'date_created', 'date_updated')
 
     def __init__(self, *args, **kwargs):
@@ -62,7 +62,7 @@ class BookSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         title = validated_data.get('title', None)
         status = validated_data.get('status', None)
-        category = validated_data.get('category', None)
+        type = validated_data.get('type', None)
         location = validated_data.get('location', None)
         author = self.request.data.get('author')
 
@@ -72,8 +72,8 @@ class BookSerializer(serializers.ModelSerializer):
         if status is not None:
             instance.status = status
 
-        if category is not None:
-            instance.category = category
+        if type is not None:
+            instance.type = type
 
         if location is not None:
             instance.location = location

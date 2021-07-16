@@ -40,26 +40,19 @@
                                     </span>
                                 </small>
                             </th>
-                            <td><p class="">{{ item.book.category | titlecase }}</p></td>
+                            <td><p class="">{{ item.book.type | titlecase }}</p></td>
                             <td><p class="">{{ item.book.location | titlecase }}</p></td>
                             <td>
-                                <p class="badge text-block"
-                                    [ngClass]="{'badge-soft-info': item.book.status==='checked out',
-                                    'badge-soft-success': item.book.status==='available',
-                                    'badge-soft-danger': (item.book.status==='damaged'|| item.book.status==='lost')}">
-                                    {{ item.book.status | titlecase  }}
-                                </p>
-                            </td>
-                            <td>
-                                <p class="badge badge-pill badge-info"  *ngIf="item.returned_date !== null"style="color: white;">
+                                <p class="badge badge-pill badge-info font-size-11"  *ngIf="item.returned_date !== null"style="color: white;">
                                     Returned
                                 </p>
-                                <p class="badge badge-pill badge-danger"  *ngIf="item.returned_date === null"style="color: white;">
+                                <p class="badge badge-pill badge-danger font-size-11"  *ngIf="item.returned_date === null"style="color: white;">
                                     Checked Out
                                 </p>
                             </td>
                             <td><p class="">{{ item.book.owner.full_name | titlecase }}</p></td>
                             <td><p class="">{{ item.checked_out_date | date:"medium" }}</p></td>
+                            <td><p class="">{{ item.returned_date | date:"medium" }}</p></td>
                             <td>
                                 <button type="button" 
                                 class="btn btn-secondary btn-sm"  
@@ -71,7 +64,7 @@
                             </td>
                         </tr>
                         <tr *ngIf="books_list?.length == 0">
-                            <td colspan="9">No Borrowed Books</td>
+                            <td colspan="9">No Books Found!</td>
                         </tr>
                     </tbody>
                 </table>

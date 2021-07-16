@@ -28,11 +28,11 @@ body {
         background-color: #34c38f!important;
     }
 
-    .navbar-expand-lg .navbar-collapse {
+    /* .navbar-expand-lg .navbar-collapse {
         display: flex !important;
         flex-basis: auto;
         justify-content: center!important;
-    }
+    } */
 
 }
 
@@ -66,4 +66,26 @@ body {
 
 .h-90{
     height: 90%!important;
+}
+
+.btn-rounded {
+    border-radius: 30px!important;
+}
+
+.nav-tabs-custom .nav-item .nav-link.active {
+    color: #495057;
+}
+
+.nav-tabs-custom .nav-item .nav-link::after {
+    content: "";
+    background: #34c38f;
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -1px;
+    -webkit-transition: all 250ms ease 0s;
+    transition: all 250ms ease 0s;
+    -webkit-transform: scale(0);
+    transform: scale(0);
 }
