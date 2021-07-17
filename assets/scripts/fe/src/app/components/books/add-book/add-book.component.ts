@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StateService } from '@uirouter/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { BookForm } from 'src/app/commons/forms/books.forms';
 import { Books } from 'src/app/commons/models/book.model';
@@ -6,6 +7,7 @@ import { AuthService } from 'src/app/commons/services/auth/auth.service';
 import { BooksService } from 'src/app/commons/services/books/books.service';
 import { NavigationService } from 'src/app/commons/services/navigation/navigation.service';
 import { AddBookMessagesComponent } from '../../partials/modals/add-book-messages/add-book-messages.component'
+
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
@@ -17,9 +19,9 @@ export class AddBookComponent implements OnInit {
   private default_status = 'available';
 
   constructor(
+    private state: StateService,
     private nav: NavigationService,
     private booksService: BooksService,
-    private authService: AuthService,
     private simpleModalService: SimpleModalService
   ) { }
 
@@ -53,6 +55,11 @@ export class AddBookComponent implements OnInit {
       this.form.form.controls['type'].value !== 'digital copy'){
       this.form.form.controls['location'].setValue('exactus office');
     }
+  }
+
+  navigationRedirect(event, route){
+    event.preventDefault();
+    this.state.go(route);
   }
 
 }

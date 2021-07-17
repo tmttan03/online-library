@@ -1,10 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NavigationService } from 'src/app/commons/services/navigation/navigation.service';
 import { UserForm } from 'src/app/commons/forms/user.forms';
-import { EditEmailForm } from 'src/app/commons/forms/email.forms';
 import { User } from 'src/app/commons/models/user.model';
-import { EditPasswordModel } from 'src/app/commons/models/edit-password.model';
-import { EditEmailModel } from 'src/app/commons/models/edit-email.model';
 import { AuthService } from 'src/app/commons/services/auth/auth.service';
 import { StateService } from '@uirouter/core';
 import { UserService } from 'src/app/commons/services/auth/user.service';
@@ -19,7 +16,6 @@ export class SettingsComponent implements OnInit {
 
   /* Form Intialization */
   private form: UserForm;
-  private edit_email_form: EditEmailForm;
 
   private file: File | null = null;
   private date: Date = new Date;
@@ -65,15 +61,6 @@ export class SettingsComponent implements OnInit {
     this.form.defaultValue(this.auth.user);
   }
 
-  emailInputChange(value) {
-    if (this.emailHasError === true) {
-      return this.emailHasError = false;
-    }
-
-    if (this.emailNoChanges === true) {
-      return this.emailNoChanges = false;
-    }
-  }
 
   usernameInputChange(value) {
     if (this.usernameHasError === true) {

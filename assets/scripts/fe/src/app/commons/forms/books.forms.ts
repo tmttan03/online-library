@@ -13,10 +13,10 @@ export class BookForm {
       id          : new FormControl(null),
       title       : new FormControl(null, [Validators.required]),
       plot        : new FormControl(null),
-      type    : new FormControl(null, [Validators.required]),
+      type        : new FormControl(null, [Validators.required]),
       location    : new FormControl(null, [Validators.required]),
       status      : new FormControl(null),
-      authors      : new FormControl(null),
+      authors     : new FormControl(null),
     });
   }
 
