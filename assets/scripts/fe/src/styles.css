@@ -109,3 +109,7 @@ tag[_ngcontent-c3]:not(.readonly):not(.tag--editing):focus {
     -webkit-box-shadow: 0 2px 3px 1px #d4d1d1;
     box-shadow: 0 2px 3px 1px #d4d1d1;
 }
+
+.modal {
+    z-index: 9999!important;
+}
