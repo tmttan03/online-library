@@ -44,8 +44,15 @@ export class AddBookComponent implements OnInit {
 
   intializeForm() {
     this.form = new BookForm(new Books);
-    this.form.form.controls['status'].setValue(this.default_status);
-    this.form.form.controls['is_digital_copy'].setValue(false);
+  }
+
+  onChangeType(){
+    if(this.form.form.controls['type'].value === 'digital copy'){
+      this.form.form.controls['location'].setValue('in the matrix');
+    } else if(this.form.form.controls['location'].value === 'in the matrix' &&
+      this.form.form.controls['type'].value !== 'digital copy'){
+      this.form.form.controls['location'].setValue('exactus office');
+    }
   }
 
 }

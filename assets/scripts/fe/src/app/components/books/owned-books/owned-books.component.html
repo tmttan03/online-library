@@ -11,6 +11,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
 <div class="row mb-2">
@@ -37,7 +38,10 @@
     </div>
     <div class="col-sm-8">
         <div class="text-sm-end">
-            <button type="button" class="btn btn-rounded btn-outline-success waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> New Book</button>
+            <button type="button" class="btn btn-rounded btn-outline-success waves-effect waves-light mb-2 me-2" 
+                (click)="navigationRedirect($event, 'add-book')">
+                <i class="mdi mdi-plus me-1"></i> New Book
+            </button>
         </div>
     </div><!-- end col-->
 </div>

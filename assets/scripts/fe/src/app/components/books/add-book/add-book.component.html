@@ -1,29 +1,60 @@
-<div class="dashboard--panel">
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non dictum libero. Vestibulum sit amet varius nunc. Sed luctus nisl sed auctor fermentum. Fusce porttitor, orci pharetra dictum laoreet, leo nulla malesuada odio, non dictum ante leo vel magna. Nullam sed dignissim quam. </p>
-  <form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
-      <div>
-          <label>Title:</label>
-          <input class="form-control" formControlName="title" type="text">
-      </div>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">New Books</h4>
 
-      <div>
-          <label>Author:</label>
-          <input class="form-control" formControlName="author" type="text">
-      </div>
-
-      <div>
-        <label>Location:</label>
-        <input class="form-control" formControlName="location" type="text">
-      </div>
-
-      <div>
-        <div>
-          <input type="checkbox" formControlName="is_digital_copy">
-          Is Digital Copy
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="/dashboard/">Home</a></li>
+                    <li class="breadcrumb-item" href="/owned-books/">Owned Books</li>
+                    <li class="breadcrumb-item active">New Book</li>
+                </ol>
+            </div>
         </div>
-      </div>
+    </div>
+</div>
 
-      <br>
-      <button class="btn btn-primary" type="submit" [disabled]="this.disable">Save</button>
-  </form>
+
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
+          <div class="form-group">
+            <label>Title:</label>
+            <input class="form-control" formControlName="title" type="text">
+          </div>
+
+          <div class="form-group">
+            <label>Author:</label>
+            <select class="form-control" multiple="multiple">
+              <option></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Type:</label>
+            <select class="form-control" formControlName="type" (change)="onChangeType()">
+                <option value="hardcover" selected="selected">Hardcover</option>
+                <option value="paperback">Paperback</option>
+                <option value="digital copy">Digital Copy</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Location:</label>
+            <select class="form-control" formControlName="location">
+                <option [disabled]="this.form.form.controls['location'].value === 'in the matrix'" value="exactus office" selected="selected">Exactus Office</option>
+                <option [disabled]="this.form.form.controls['location'].value === 'in the matrix'" value="owner's home">Owners Home</option>
+                <option disabled value="in the matrix">In The Matrix</option>
+            </select>
+          </div>
+
+          <div class="text-right">
+            <button type="submit" class="btn btn-primary w-md">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

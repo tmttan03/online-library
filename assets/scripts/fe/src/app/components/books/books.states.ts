@@ -13,12 +13,6 @@ export const BOOK_STATES: Object[] = [
         onEnter: LoginRequired
     },
     {
-        name : 'categories',
-        url  : '/categories/',
-        views:  NavContent(AuthorsComponent),
-        onEnter: LoginRequired
-    },
-    {
         name : 'add-book',
         url  : '/add-book/',
         views:  NavContent(AddBookComponent),

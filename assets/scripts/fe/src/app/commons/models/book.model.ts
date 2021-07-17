@@ -1,13 +1,21 @@
+import { User } from './user.model'
+import { Author } from './author.model'
+
 export class Books {
 
-  title : string = null;
-  author: string = null;
-  location : string = null;
-  is_digital_copy : boolean = null;
-  owner: Number = null;
-  status : string = null;
+  id             : string = null;
+  title          : string = null;
+  plot           : string = null;
+  type           : string = null;
+  location       : string = null;
+  status         : string = null;
+  authors        : Author[] = [];
+  owner          : User;
+  date_created   : string = null;
 
   constructor(data={}) {
     Object.assign(this, data);
   }
 }
+
+

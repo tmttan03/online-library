@@ -8,6 +8,7 @@ import { SearchForm } from 'src/app/commons/forms/search.forms';
 import { SearchModel } from 'src/app/commons/models/search.model';
 import { UpdateBookComponent } from '../../partials/modals/update-book/update-book.component';
 import { ConfirmationMessageComponent } from '../../partials/modals/confirmation-message/confirmation-message.component';
+import { StateService } from '@uirouter/core';
 
 @Component({
   selector: 'app-owned-books',
@@ -21,6 +22,7 @@ export class OwnedBooksComponent implements OnInit {
   private form: SearchForm;
 
   constructor(
+    private state: StateService,
     private nav: NavigationService,
     private booksService: BooksService,
     private simpleModalService: SimpleModalService
@@ -97,6 +99,11 @@ export class OwnedBooksComponent implements OnInit {
         }
       }
     );
+  }
+
+  navigationRedirect(event, route){
+    event.preventDefault();
+    this.state.go(route);
   }
 
 }
