@@ -32,19 +32,18 @@ export class UpdateBookComponent extends SimpleModalComponent<ConfirmModel, any>
     this.form = new UpdateBookForm(new Books);
     this.form.defaultValue(this.book);
 
-    Object(this.book.authors).forEach(element => {
+    Object(this.book.authors).forEach((element, index) => {
       this.author_list.push({
         'value': element.name,
         'display': element.name,
       })
     });
-    console.log(this.author_list);
   }
 
   onSubmit({ value, valid }: { value: Books, valid: boolean }) {
     if (valid) {
-      value.authors = this.author_list;
       if (this.form.form.dirty) {
+        value.authors = this.author_list;
         this.result = value;
       }
       this.close();

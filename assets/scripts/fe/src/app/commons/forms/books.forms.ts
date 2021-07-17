@@ -58,7 +58,7 @@ export class UpdateBookForm {
       type        : new FormControl(data.type, [Validators.required]),
       location    : new FormControl(data.location, [Validators.required]),
       status      : new FormControl(data.status, [Validators.required]),
-      authors     : new FormControl(data.authors, [Validators.required]),
+      authors     : new FormControl(data.authors),
     });
   }
 

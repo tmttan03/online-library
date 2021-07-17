@@ -59,12 +59,13 @@ class BookSerializer(serializers.ModelSerializer):
             book.thumbnail=validated_data.get('thumbnail')
         book.save()
         for data in self.request.data.get('authors'):
-            author = Author.objects.create(name=data.get('value'))
+            author = Author.objects.get_or_create(name=data.get('value'))
             book.authors.add(author)
 
     def update(self, instance, validated_data):
         title = validated_data.get('title', None)
         status = validated_data.get('status', None)
+        plot = validated_data.get('plot', None)
         type = validated_data.get('type', None)
         location = validated_data.get('location', None)
         authors = self.request.data.get('authors')
@@ -74,6 +75,9 @@ class BookSerializer(serializers.ModelSerializer):
 
         if status is not None:
             instance.status = status
+
+        if plot is not None:
+            instance.plot = plot
 
         if type is not None:
             instance.type = type
@@ -85,7 +89,7 @@ class BookSerializer(serializers.ModelSerializer):
         if authors is not None:
             for data in authors:
                 author = Author.objects.create(name=data.get('value'))
-                instance.author.add(author)
+                instance.authors.add(author)
         instance.save()
         return instance
 

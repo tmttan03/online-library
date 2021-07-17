@@ -20,6 +20,7 @@ export class OwnedBooksComponent implements OnInit {
   books_list: any;
   all_books: any;
   private form: SearchForm;
+  private author_list = [];
 
   constructor(
     private state: StateService,
@@ -79,16 +80,26 @@ export class OwnedBooksComponent implements OnInit {
     this.simpleModalService.addModal(UpdateBookComponent, {book: book}).subscribe(
       (bookData) => {
         if (bookData) {
-          console.log(bookData)
           this.simpleModalService.addModal(ConfirmationMessageComponent, {has_error: false}).subscribe(
             (isTrue) => {
               if (isTrue) {
                 this.booksService.updateBook(bookData).subscribe(
                   data => {
                     const dt = Object(bookData);
+
+                    Object(book.authors).forEach((element, index) => {
+                      this.author_list.push({
+                        'id': index,
+                        'name': element.value,
+                      })
+                    });
+
                     book.title = bookData.title;
-                    book.author = bookData.author;
+                    book.plot = bookData.plot;
+                    book.type = bookData.type;
+                    this.author_list = bookData.authors;
                     book.location = bookData.location;
+
                   }, error => {
                     console.log(error);
                   }

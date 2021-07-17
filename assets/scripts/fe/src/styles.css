@@ -94,7 +94,7 @@ body {
     border-bottom: 2px solid #34c38f!important;
 }
 
-tag[_ngcontent-c6]:not(.readonly):not(.tag--editing):focus {
+tag[_ngcontent-c4]:not(.readonly):not(.tag--editing):focus {
     background: #34c38f!important;
     color: #fff;
     -webkit-box-shadow: 0 2px 3px 1px #d4d1d1;
