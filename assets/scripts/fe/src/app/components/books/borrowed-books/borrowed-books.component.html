@@ -52,7 +52,7 @@
                                 <p class="font-weight-bold mb-0">{{ item.book.title | titlecase }} </p>
                                 <small class="text-muted">by:
                                     <span *ngFor="let author of item.book.authors; let last = last;">
-                                        {{ author.name }}<span *ngIf="!last">,</span>
+                                        {{ author.name | titlecase  }}<span *ngIf="!last">,</span>
                                     </span>
                                 </small>
                             </th>

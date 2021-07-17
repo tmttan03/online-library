@@ -39,12 +39,12 @@ $ python manage.py migrate
 $ python manage.py loaddata core/fixtures/initial_data.json
 ```
 
-5. Runserver
+5. Run server
 ```
 $ python manage.py runserver
 ```
 
-6. Build and Run Angular
+6. Build to build frontend assets
 ```
 $ cd <DIRECTORY>/online-library/assets/scripts/fe
 $ npm install

@@ -122,6 +122,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-item dropdown" [ngClass]="{'active': state.includes('library')}">
+                        <a class="nav-link arrow-none" nohref (click)="navigationRedirect($event, 'add-book')" role="button">
+                            <i class="bx bxs-add-to-queue me-2"></i><span>New Book</span>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </nav>

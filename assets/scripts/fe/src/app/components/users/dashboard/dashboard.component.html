@@ -1,26 +1,14 @@
-<div class="row">
-    <div class="col-12">
-        <div class="page-title-box d-flex align-items-center justify-content-between">
-            <h4 class="mb-0 font-size-18">Book of the Day</h4>
-        </div>
-    </div>
-</div>
-
-<div class="row" *ngIf="book_of_d_day">
-    <div class="col-xl-12 col-sm-12 cursor-pointer">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title mt-0">{{ book_of_d_day.title | titlecase }}</h4>
-                <h6 class="card-subtitle font-14 text-muted">by
-                    <span *ngFor="let author of book_of_d_day.authors; let last = last;">
-                        {{ author.name | titlecase }}<span *ngIf="!last">,</span>
-                    </span>
-                </h6>
-            </div>
-            <img class="image-thumb-lg" height="250" src="{{ book_of_d_day.thumbnail }}" alt="Card image cap" style="object-fit: cover;">
-            <div class="card-body">
-                <p class="card-text">{{ book_of_d_day.plot }}</p>
-                <a class="card-link" (click)="rowClicked(book_of_d_day)">View Book</a>
+<div class="row mb-2">
+    <div class="col-sm-12">
+        <div class="me-2 mb-2">
+            <div class="search-box chat-search-box me-2 mb-2">
+                <div class="position-relative">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Search title..."
+                           (keyup)="searchTitle($event)">
+                    <i class="bx bx-search-alt search-icon"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -41,7 +29,7 @@
                         <h5 class="font-size-15">{{ book.title | titlecase }}</h5>
                         <p>by
                             <span *ngFor="let author of book.authors; let last = last;">
-                                {{ author.name }}<span *ngIf="!last">,</span>
+                                {{ author.name | titlecase }}<span *ngIf="!last">,</span>
                             </span>
                         </p>
                         <p class="text-muted mb-4">{{ book.plot| slice:0:100 }} ...</p>
@@ -62,6 +50,16 @@
                         <i class="bx bx-calendar me-1"></i> {{ book.date_created | date:"fullDate" }}
                     </li>
                 </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-sm-12 cursor-pointer" *ngIf="books_list?.length == 0">
+        <div class="card h-90">
+            <div class="card-body">
+                <h6> No Books added yet, try adding one now.
+                    <a class="btn btn-link" (click)="navigationRedirect($event, 'add-book')">Add Book Now!</a>
+                </h6>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@
         <b>{{ book.title }}</b> <br>
         <small class="text-muted font-size-11">by
           <span *ngFor="let author of book.authors; let last = last;">
-            {{ author.name }}<span *ngIf="!last">,</span>
+            {{ author.name | titlecase  }}<span *ngIf="!last">,</span>
           </span>
         </small>
       </h6>

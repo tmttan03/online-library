@@ -8,7 +8,6 @@ import { SearchModel } from 'src/app/commons/models/search.model';
 
 import { NavigationService } from 'src/app/commons/services/navigation/navigation.service';
 import { AuthService } from 'src/app/commons/services/auth/auth.service';
-import { UserService } from 'src/app/commons/services/auth/user.service';
 import { BooksService } from 'src/app/commons/services/books/books.service';
 import { SimpleModalService } from "ngx-simple-modal";
 
@@ -23,7 +22,6 @@ export class DashboardComponent implements OnInit {
 
   books_list: any;
   all_books: any;
-  book_of_d_day:any;
   private form: SearchForm;
 
   constructor(
@@ -54,21 +52,10 @@ export class DashboardComponent implements OnInit {
       data => {
         this.all_books = data;
         this.books_list = this.all_books;
-        this.book_of_d_day = this.books_list[Math.floor(Math.random() * this.books_list.length)];
       }, error => {
         console.log(error);
       }
     );
-  }
-
-  onSubmit({ value, valid }: { value: SearchModel, valid: boolean }) {
-    if (valid) {
-      this.books_list = this.all_books.filter(x => x.title.toLowerCase().includes(value.search_text.toLowerCase()));
-    } else {
-      if (value.search_text === '') {
-        this.books_list = this.all_books;
-      }
-    }
   }
 
   rowClicked(book) {
@@ -80,18 +67,19 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  filterClick(event, status) {
+  navigationRedirect(event, route){
     event.preventDefault();
-    if (status === 'all') {
-      this.books_list = this.all_books;
-    } else if (status === 'digital copy') {
-      this.books_list = this.all_books.filter(x => x.is_digital_copy === true);
-    } else {
-      this.books_list = this.all_books.filter(x => x.status === status);
-    }
-
-    this.form.form.controls['search_text'].setValue(null);
+    this.state.go(route);
   }
+
+  searchTitle(event){
+    if (event.target.value === '') {
+      this.books_list = this.all_books;
+    }else{
+      this.books_list = this.all_books.filter(x => x.title.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
+  }
+
 }
 
 

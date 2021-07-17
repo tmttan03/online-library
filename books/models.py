@@ -47,7 +47,7 @@ class Book(models.Model):
     )
 
     title = models.CharField(max_length=255)
-    plot = models.TextField(max_length=255, blank=True)
+    plot = models.TextField(blank=True)
     type = models.CharField(default=HARDCOVER, max_length=20, choices=TYPES)
     location = models.CharField(default=EXACTUS_OFFICE, max_length=30, choices=LOCATIONS)
     status = models.CharField(default=AVAILABLE, max_length=20, choices=STATUSES)

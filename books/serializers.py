@@ -50,7 +50,10 @@ class BookSerializer(serializers.ModelSerializer):
 
         book.save()
         for data in self.request.data.get('authors'):
-            author = Author.objects.create(name=data.get('value'))
+            try:
+                author, created = Author.objects.get_or_create(name=data.get('value'))
+            except: # if ever it causes an error just create the author instead
+                author = Author.objects.create(name=data.get('value'))
             book.authors.add(author)
 
     def update(self, instance, validated_data):
@@ -79,7 +82,10 @@ class BookSerializer(serializers.ModelSerializer):
         instance.authors.clear()
         if authors is not None:
             for data in authors:
-                author = Author.objects.create(name=data.get('value'))
+                try:
+                    author, created = Author.objects.get_or_create(name=data.get('value'))
+                except: # if ever it causes an error just create the author instead
+                    author = Author.objects.create(name=data.get('value'))
                 instance.authors.add(author)
         instance.save()
         return instance

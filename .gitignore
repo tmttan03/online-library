@@ -113,7 +113,7 @@ local_settings.py
 *.bak
 
 node_modules/
-media/books/
+# media/books/
 media/cover/
 # static/
 .sass-cache/
