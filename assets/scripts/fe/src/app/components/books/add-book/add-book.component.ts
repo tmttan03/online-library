@@ -16,6 +16,7 @@ import { AddBookMessagesComponent } from '../../partials/modals/add-book-message
 export class AddBookComponent implements OnInit {
 
   private form: BookForm;
+  private author_list = [];
   private default_status = 'available';
 
   constructor(
@@ -32,6 +33,8 @@ export class AddBookComponent implements OnInit {
 
   onSubmit({ value, valid }: { value: Books, valid: boolean }) {
     if (valid) {
+      //append author_list to this.form.form.author
+      
       this.booksService.addBook(value).subscribe(
         data => {
           this.simpleModalService.addModal(AddBookMessagesComponent, {has_error:false}).subscribe();
