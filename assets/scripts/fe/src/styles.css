@@ -89,3 +89,7 @@ body {
     -webkit-transform: scale(0);
     transform: scale(0);
 }
+
+.ng2-tag-input.ng2-tag-input--focused[_ngcontent-c4] {
+    border-bottom: 2px solid #34c38f;
+}

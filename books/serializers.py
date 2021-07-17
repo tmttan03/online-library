@@ -54,16 +54,16 @@ class BookSerializer(serializers.ModelSerializer):
             owner=self.request.user,
         )
         book.save()
-        # for data in self.request.data.get('author'):
-        #     author = Author.objects.get(id=data.get('id'))
-        #     book.author.add(author)
+        for data in self.request.data.get('authors'):
+            author = Author.objects.create(name=data.get('value'))
+            book.authors.add(author)
 
     def update(self, instance, validated_data):
         title = validated_data.get('title', None)
         status = validated_data.get('status', None)
         type = validated_data.get('type', None)
         location = validated_data.get('location', None)
-        author = self.request.data.get('author')
+        authors = self.request.data.get('authors')
 
         if title is not None:
             instance.title = title
@@ -77,11 +77,11 @@ class BookSerializer(serializers.ModelSerializer):
         if location is not None:
             instance.location = location
 
-        # instance.author.clear()
-        # if author is not None:
-        #     for data in author:
-        #         book_author = Author.objects.get(id=data.get('id'))
-        #         instance.author.add(book_author)
+        instance.authors.clear()
+        if authors is not None:
+            for data in authors:
+                author = Author.objects.create(name=data.get('value'))
+                instance.author.add(author)
         instance.save()
         return instance
 

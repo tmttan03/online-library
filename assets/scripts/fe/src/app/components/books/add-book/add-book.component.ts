@@ -33,15 +33,17 @@ export class AddBookComponent implements OnInit {
 
   onSubmit({ value, valid }: { value: Books, valid: boolean }) {
     if (valid) {
-      //append author_list to this.form.form.author
-      
+      value.authors = this.author_list;
+      value.status = this.default_status;
       this.booksService.addBook(value).subscribe(
         data => {
           this.simpleModalService.addModal(AddBookMessagesComponent, {has_error:false}).subscribe();
           this.intializeForm();
+          this.author_list = [];
         }, error => {
           this.simpleModalService.addModal(AddBookMessagesComponent, {has_error:true}).subscribe();
-          this.intializeForm();
+          this.intializeForm()
+          this.author_list = [];
         }
       );
     }
@@ -49,7 +51,7 @@ export class AddBookComponent implements OnInit {
 
   intializeForm() {
     this.form = new BookForm(new Books);
-    this.form.form.controls['status'].setValue('available');
+    // this.form.form.controls['status'].setValue('available');
     this.form.form.controls['type'].setValue('hardcover');
     this.form.form.controls['location'].setValue('exactus office');
   }
