@@ -38,18 +38,6 @@ export class BorrowedBooksComponent implements OnInit {
         console.log(error)
       }
     )
-
-
-  }
-
-  onSubmit({ value, valid }: { value: SearchModel, valid: boolean }) {
-    if (valid) {
-      this.books_list = this.all_books.filter(x => x.book.title.toLowerCase().includes(value.search_text.toLowerCase()));
-    } else {
-      if (value.search_text === '') {
-        this.books_list = this.all_books;
-      }
-    }
   }
 
   returnBook(event, item) {
@@ -74,13 +62,18 @@ export class BorrowedBooksComponent implements OnInit {
     event.preventDefault();
     if (status === 'all') {
       this.books_list = this.all_books;
-    } else if (status === 'digital copy') {
-      this.books_list = this.all_books.filter(x => x.book.is_digital_copy === true);
     } else {
       this.books_list = this.all_books.filter(x => x.book.status === status);
     }
-
     this.form.form.controls['search_text'].setValue(null);
+  }
+
+  searchTitle(event){
+    if (event.target.value === '') {
+      this.books_list = this.all_books;
+    }else{
+      this.books_list = this.all_books.filter(x => x.title.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
   }
 
   rowClicked(book) {

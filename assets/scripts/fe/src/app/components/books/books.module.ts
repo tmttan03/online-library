@@ -8,7 +8,6 @@ import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthorsComponent } from './authors/authors.component';
 
 @NgModule({
   imports: [
@@ -19,6 +18,6 @@ import { AuthorsComponent } from './authors/authors.component';
     ReactiveFormsModule,
     TagInputModule,
   ],
-  declarations: [AddBookComponent, BorrowedBooksComponent, OwnedBooksComponent, AuthorsComponent]
+  declarations: [AddBookComponent, BorrowedBooksComponent, OwnedBooksComponent]
 })
 export class BooksModule { }

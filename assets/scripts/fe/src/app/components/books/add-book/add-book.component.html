@@ -14,20 +14,12 @@
     </div>
 </div>
 
-
 <div class="row">
   <div class="col-xl-12">
     <div class="card">
       <div class="card-body">
         <form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
-          <div class="form-group">
-            <label>Image:</label>
-            <div *ngIf="this.image_url">
-              <img src="{{ image_url }}" class="image-preview mb-2">
-                <button (click)="removeImg()"> remove img</button>
-            </div>
-            <input class="form-control" formControlName="thumbnail" type="file" (change)="onSelectFile($event)">
-          </div>
+
           <div class="form-group">
             <label>Title:</label>
             <input class="form-control" formControlName="title" type="text">
@@ -37,10 +29,12 @@
           <div class="form-group">
             <label>Author:</label>
             <tag-input
-              [(ngModel)]='author_list' 
+              [(ngModel)]='author_list'
               [ngModelOptions]="{standalone: true}"
               [addOnBlur]="true"
-              placeholder='Add Author'>
+              placeholder='Add Author'
+              [placeholder]="'Add Author'"
+              [secondaryPlaceholder]="'Enter an Author'">
             </tag-input>
           </div>
 
@@ -67,6 +61,15 @@
               <option disabled value="in the matrix">In The Matrix</option>
             </select>
             <span *ngIf="this.form.form.controls.location.hasError('required')" class="text-danger"><p><small>This field is required..</small></p></span>
+          </div>
+
+          <div class="form-group">
+            <label>Thumbnail:</label>
+            <div *ngIf="this.image_url">
+              <img src="{{ image_url }}" class="img-thumbnail mb-2" width="200">
+                <button class="btn btn-link" (click)="removeImg()">x</button>
+            </div>
+            <input class="form-control" formControlName="thumbnail" type="file" (change)="onSelectFile($event)">
           </div>
 
           <div class="text-right">

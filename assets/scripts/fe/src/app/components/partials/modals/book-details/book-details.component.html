@@ -34,7 +34,7 @@
       <hr>
       <p>Comments <span *ngIf='comments_list'>({{ comments_list.length }}):</span></p>
 
-      <div class="comment-section" style="max-height: 200px; overflow: auto;">
+      <div class="comment-section" style="max-height: 125px; overflow: auto;">
         <div class="d-flex align-items-center pt-2 pb-3 border-bottom" *ngFor="let comment of comments_list?.reverse()" >
           <img class="img-sm rounded-circle header-profile-user" src="{{ comment.user.avatar }}" alt="profile">
           <div class="ml-3" style="line-height: 0.5;">

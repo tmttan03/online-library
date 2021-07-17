@@ -13,6 +13,22 @@
     </div>
 </div>
 
+<div class="row mb-2">
+    <div class="col-sm-12">
+        <div class="me-2 mb-2">
+            <div class="search-box me-2 mb-2 d-inline-block">
+                <div class="position-relative">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Search title..."
+                           (keyup)="searchTitle($event)">
+                    <i class="bx bx-search-alt search-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="">
@@ -31,7 +47,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of books_list" (click)="rowClicked(item.book)">
+                        <tr *ngFor="let item of books_list">
                             <th scope="row">
                                 <p class="font-weight-bold mb-0">{{ item.book.title | titlecase }} </p>
                                 <small class="text-muted">by:
@@ -52,14 +68,21 @@
                             </td>
                             <td><p class="">{{ item.book.owner.full_name | titlecase }}</p></td>
                             <td><p class="">{{ item.checked_out_date | date:"medium" }}</p></td>
-                            <td><p class="">{{ item.returned_date | date:"medium" }}</p></td>
                             <td>
-                                <button type="button" 
-                                class="btn btn-secondary btn-sm"  
-                                [hidden]="item.returned_date !== null" 
-                                (click)="returnBook($event, item)">
-                                    Return Book
-                                </button> 
+                                <p class="text-center">
+                                    <span [hidden]="item.returned_date"> --- </span>
+                                    {{ item.returned_date | date:"medium" }}
+                                </p></td>
+                            <td>
+                                <button type="button"
+                                        class="btn btn-light btn-sm mr-2"
+                                        (click)="rowClicked(item.book)">View</button>
+
+                                <button type="button"
+                                        class="btn btn-secondary btn-sm"
+                                        [hidden]="item.returned_date !== null"
+                                        (click)="returnBook($event, item)">Return Book</button>
+
                                 <p class="" [hidden]="item.returned_date === null">{{ item.returned_date | date:"medium" }}
                             </td>
                         </tr>

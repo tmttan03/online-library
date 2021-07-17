@@ -19,6 +19,7 @@ export class OwnedBooksComponent implements OnInit {
 
   books_list: any;
   all_books: any;
+  search_txt:string;
   private form: SearchForm;
   private author_list = [];
 
@@ -47,14 +48,13 @@ export class OwnedBooksComponent implements OnInit {
     event.preventDefault();
     if (status === 'all') {
       this.books_list = this.all_books;
-    } else if (status === 'digital copy') {
-      this.books_list = this.all_books.filter(x => x.is_digital_copy === true);
     } else {
       this.books_list = this.all_books.filter(x => x.status === status);
     }
 
     this.form.form.controls['search_text'].setValue(null);
   }
+
 
   rowClicked(book) {
     this.simpleModalService.addModal(BookDetailsComponent, {
@@ -65,13 +65,11 @@ export class OwnedBooksComponent implements OnInit {
     });
   }
 
-  onSubmit({ value, valid }: { value: SearchModel, valid: boolean }) {
-    if (valid) {
-      this.books_list = this.all_books.filter(x => x.title.toLowerCase().includes(value.search_text.toLowerCase()));
-    } else {
-      if (value.search_text === '') {
-        this.books_list = this.all_books;
-      }
+  searchTitle(event){
+    if (event.target.value === '') {
+      this.books_list = this.all_books;
+    }else{
+      this.books_list = this.all_books.filter(x => x.title.toLowerCase().includes(event.target.value.toLowerCase()));
     }
   }
 

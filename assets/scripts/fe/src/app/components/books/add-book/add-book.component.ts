@@ -3,7 +3,6 @@ import { StateService } from '@uirouter/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { BookForm } from 'src/app/commons/forms/books.forms';
 import { Books } from 'src/app/commons/models/book.model';
-import { AuthService } from 'src/app/commons/services/auth/auth.service';
 import { BooksService } from 'src/app/commons/services/books/books.service';
 import { NavigationService } from 'src/app/commons/services/navigation/navigation.service';
 import { AddBookMessagesComponent } from '../../partials/modals/add-book-messages/add-book-messages.component'
@@ -37,7 +36,7 @@ export class AddBookComponent implements OnInit {
       value.authors = this.author_list;
       value.status = this.default_status;
       value.thumbnail=this.image_url;
-      
+
       this.booksService.addBook(value).subscribe(
         data => {
           this.simpleModalService.addModal(AddBookMessagesComponent, {has_error:false}).subscribe();
@@ -54,7 +53,6 @@ export class AddBookComponent implements OnInit {
 
   intializeForm() {
     this.form = new BookForm(new Books);
-    // this.form.form.controls['status'].setValue('available');
     this.form.form.controls['type'].setValue('hardcover');
     this.form.form.controls['location'].setValue('exactus office');
     this.removeImg();
@@ -72,9 +70,8 @@ export class AddBookComponent implements OnInit {
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-
       reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event) => { 
+      reader.onload = (event) => {
         this.image_url = event.target.result;
       }
     }

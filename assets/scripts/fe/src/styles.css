@@ -93,8 +93,17 @@ body {
 .ng2-tag-input.ng2-tag-input--focused[_ngcontent-c4] {
     border-bottom: 2px solid #34c38f!important;
 }
+.ng2-tag-input.ng2-tag-input--focused[_ngcontent-c3] {
+    border-bottom: 2px solid #34c38f!important;
+}
 
 tag[_ngcontent-c4]:not(.readonly):not(.tag--editing):focus {
+    background: #34c38f!important;
+    color: #fff;
+    -webkit-box-shadow: 0 2px 3px 1px #d4d1d1;
+    box-shadow: 0 2px 3px 1px #d4d1d1;
+}
+tag[_ngcontent-c3]:not(.readonly):not(.tag--editing):focus {
     background: #34c38f!important;
     color: #fff;
     -webkit-box-shadow: 0 2px 3px 1px #d4d1d1;

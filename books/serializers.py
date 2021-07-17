@@ -15,21 +15,6 @@ class AuthorSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         return super(AuthorSerializer, self).__init__(*args, **kwargs)
 
-    def create(self, validated_data):
-        author = Author(name=validated_data['name'])
-        author.save()
-
-    def save(self, **kwargs):
-        validated_data = dict(
-            list(self.validated_data.items()) +
-            list(kwargs.items())
-        )
-        if not self.instance:
-            self.instance = self.create(validated_data)
-        else:
-            self.instance = self.update(self.instance, validated_data)
-        return self.instance
-
 
 class BookSerializer(serializers.ModelSerializer):
 
@@ -55,8 +40,10 @@ class BookSerializer(serializers.ModelSerializer):
             location=validated_data.get('location', None),
             owner=self.request.user,
         )
+
         if validated_data.get('thumbnail'):
             book.thumbnail=validated_data.get('thumbnail')
+
         book.save()
         for data in self.request.data.get('authors'):
             author = Author.objects.create(name=data.get('value'))
@@ -115,14 +102,6 @@ class CommentSerializer(serializers.ModelSerializer):
         self.request = kwargs.pop('request', None)
         return super(CommentSerializer, self).__init__(*args, **kwargs)
 
-    def save(self, **kwargs):
-        validated_data = dict(list(self.validated_data.items()) + list(kwargs.items()))
-        if not self.instance:
-            self.instance = self.create(validated_data)
-        else:
-            self.instance = self.update(self.instance, validated_data)
-        return self.instance
-
 
 class CheckoutSerializer(serializers.ModelSerializer):
 
@@ -136,11 +115,3 @@ class CheckoutSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         return super(CheckoutSerializer, self).__init__(*args, **kwargs)
-
-    def save(self, **kwargs):
-        validated_data = dict(list(self.validated_data.items()) + list(kwargs.items()))
-        if not self.instance:
-            self.instance = self.create(validated_data)
-        else:
-            self.instance = self.update(self.instance, validated_data)
-        return self.instance

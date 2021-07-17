@@ -15,37 +15,29 @@
 
 
 <div class="row mb-2">
-    <div class="col-sm-4">
-        <div class="me-2 mb-2 d-inline-block">
-            <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
-                <div class="input-group mb-3">
-                    <input type="text" formControlName="search_text" class="form-control" placeholder="Search Title" aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append" ngbDropdown>
-                        <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle><i class="la la-filter"></i> Filter</button>
-                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
-                            <a class="dropdown-item" href="." ngbDropdownItem (click)="filterClick($event, 'all')">All</a>
-                            <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'available')">Available</a>
-                            <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'checked out')">Checked Out</a>
-                            <a class="dropdown-item" href="#" ngbDropdownItem (click)="filterClick($event, 'digital copy')">Digital Copy</a>
-                        </div>
-                    </div>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit"><i class="bx bx-search-alt search-icon"></i></button>
-                    </div>
+    <div class="col-sm-6">
+        <div class="me-2 mb-2">
+            <div class="search-box me-2 mb-2 d-inline-block">
+                <div class="position-relative">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Search title..."
+                           (keyup)="searchTitle($event)">
+                    <i class="bx bx-search-alt search-icon"></i>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-6">
         <div class="text-sm-end">
-            <button type="button" class="btn btn-rounded btn-outline-success waves-effect waves-light mb-2 me-2" 
-                (click)="navigationRedirect($event, 'add-book')">
+            <button type="button"
+                    class="btn btn-rounded btn-outline-success waves-effect waves-light mb-2 me-2"
+                    (click)="navigationRedirect($event, 'add-book')">
                 <i class="mdi mdi-plus me-1"></i> New Book
             </button>
         </div>
-    </div><!-- end col-->
+    </div>
 </div>
-
 
 <div class="row">
     <div class="col-lg-12">
@@ -84,9 +76,13 @@
                             </td>
                             <td><p class="">{{ book.owner.full_name | titlecase }}</p></td>
                             <td>
-                                <button type="button" 
+                                <button type="button"
+                                        class="btn btn-light btn-sm mr-2"
+                                        (click)="rowClicked(book)">View</button>
+
+                                <button type="button"
                                         class="btn btn-secondary btn-sm"
-                                        (click)="updateBook($event, book)">Update</button> 
+                                        (click)="updateBook($event, book)">Update</button>
                             </td>
                         </tr>
                         <tr *ngIf="books_list?.length == 0">

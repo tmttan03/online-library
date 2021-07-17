@@ -19,9 +19,10 @@
                 [(ngModel)]='author_list'
                 [ngModelOptions]="{standalone: true}"
                 [addOnBlur]="true"
-                placeholder='Add Author'>
+                placeholder='Add Author'
+                [placeholder]="'Add Author'" 
+                [secondaryPlaceholder]="'Enter an Author'">
               </tag-input>
-              <span *ngIf="this.form.form.controls.authors.hasError('required')" class="text-danger"><p><small>This field is required..</small></p></span>
             </div>
 
             <div class="form-group">
