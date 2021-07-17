@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@ng-bootstrap/ng-bootstrap": "^3.3.1",
     "@uirouter/angular": "^4.0.0",
+    "@uirouter/core": "^6.0.8",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.9.3",

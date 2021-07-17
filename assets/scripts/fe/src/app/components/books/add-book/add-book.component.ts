@@ -46,6 +46,9 @@ export class AddBookComponent implements OnInit {
 
   intializeForm() {
     this.form = new BookForm(new Books);
+    this.form.form.controls['status'].setValue('available');
+    this.form.form.controls['type'].setValue('hardcover');
+    this.form.form.controls['location'].setValue('exactus office');
   }
 
   onChangeType(){

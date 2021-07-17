@@ -51,10 +51,13 @@ export class UpdateBookForm {
     /* Initialize the form builder
      */
     this.form = new FormBuilder().group({
-      id              : new FormControl(data.id),
-      title           : new FormControl(data.title, [Validators.required]),
-      author          : new FormControl(data.author, [Validators.required]),
-      location        : new FormControl(data.location, [Validators.required])
+      id          : new FormControl(data.id),
+      title       : new FormControl(data.title, [Validators.required]),
+      plot        : new FormControl(data.plot),
+      type        : new FormControl(data.type, [Validators.required]),
+      location    : new FormControl(data.location, [Validators.required]),
+      status      : new FormControl(data.status, [Validators.required]),
+      authors     : new FormControl(data.authors),
     });
   }
 

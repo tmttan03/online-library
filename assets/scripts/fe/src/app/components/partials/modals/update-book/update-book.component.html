@@ -1,30 +1,48 @@
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content">
     <div class="modal-header">
-      Update Book
+      <h6>Update Book</h6>
       <button type="button" class="close" (click)="close()" >&times;</button>
     </div>
     <div class="modal-body">
       <div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non dictum libero. Vestibulum sit amet varius nunc. Sed luctus nisl sed auctor fermentum. Fusce porttitor, orci pharetra dictum laoreet, leo nulla malesuada odio, non dictum ante leo vel magna. Nullam sed dignissim quam. </p>
         <form [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)">
-            <div>
-                <label>Title:</label>
-                <input class="form-control" formControlName="title" type="text">
+            <div class="form-group">
+              <label>Title:</label>
+              <input class="form-control" formControlName="title" type="text">
+              <span *ngIf="this.form.form.controls.title.hasError('required')" class="text-danger"><p><small>This field is required..</small></p></span>
             </div>
-      
-            <div>
-                <label>Author:</label>
-                <input class="form-control" formControlName="author" type="text">
+
+            <div class="form-group">
+              <label>Author:</label>
             </div>
-      
-            <div>
+
+            <div class="form-group">
+              <label>Plot:</label>
+              <textarea class="form-control" formControlName="plot"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Type:</label>
+              <select class="form-select" formControlName="type" (change)="onChangeType()">
+                <option value="hardcover">Hardcover</option>
+                <option value="paperback">Paperback</option>
+                <option value="digital copy">Digital Copy</option>
+              </select>
+              <span *ngIf="this.form.form.controls.type.hasError('required')" class="text-danger"><p><small>This field is required..</small></p></span>
+            </div>
+
+            <div class="form-group">
               <label>Location:</label>
-              <input class="form-control" formControlName="location" type="text">
+              <select class="form-select" formControlName="location">
+                <option [disabled]="this.form.form.controls['location'].value === 'in the matrix'" value="exactus office">Exactus Office</option>
+                <option [disabled]="this.form.form.controls['location'].value === 'in the matrix'" value="owner's home">Owners Home</option>
+                <option disabled value="in the matrix">In The Matrix</option>
+              </select>
+              <span *ngIf="this.form.form.controls.location.hasError('required')" class="text-danger"><p><small>This field is required..</small></p></span>
             </div>
-            
             <br>
-            <button class="btn btn-primary" type="submit" [disabled]="this.disable">Save</button>
+            <button class="btn btn-primary btn-block" type="submit" [disabled]="this.disable">Save</button>
         </form>
       </div>
     </div>

@@ -23,7 +23,7 @@ class AuthorSerializer(serializers.ModelSerializer):
             list(self.validated_data.items()) +
             list(kwargs.items())
         )
-        if self.instance:
+        if not self.instance:
             self.instance = self.create(validated_data)
         else:
             self.instance = self.update(self.instance, validated_data)
@@ -48,10 +48,9 @@ class BookSerializer(serializers.ModelSerializer):
         book = Book(
             title=validated_data.get('title', None),
             plot=validated_data.get('plot', None),
-            category=validated_data.get('category', None),
+            type=validated_data.get('type', None),
             status=validated_data.get('status', None),
             location=validated_data.get('location', None),
-            # thumbnails=validated_data.get('thumbnails', None),
             owner=self.request.user,
         )
         book.save()
@@ -78,17 +77,17 @@ class BookSerializer(serializers.ModelSerializer):
         if location is not None:
             instance.location = location
 
-        instance.author.clear()
-        if author is not None:
-            for data in author:
-                book_author = Author.objects.get(id=data.get('id'))
-                instance.author.add(book_author)
+        # instance.author.clear()
+        # if author is not None:
+        #     for data in author:
+        #         book_author = Author.objects.get(id=data.get('id'))
+        #         instance.author.add(book_author)
         instance.save()
         return instance
 
     def save(self, **kwargs):
         validated_data = dict(list(self.validated_data.items()) + list(kwargs.items()))
-        if self.instance:
+        if not self.instance:
             self.instance = self.create(validated_data)
         else:
             self.instance = self.update(self.instance, validated_data)
@@ -110,7 +109,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def save(self, **kwargs):
         validated_data = dict(list(self.validated_data.items()) + list(kwargs.items()))
-        if self.instance:
+        if not self.instance:
             self.instance = self.create(validated_data)
         else:
             self.instance = self.update(self.instance, validated_data)
@@ -132,7 +131,7 @@ class CheckoutSerializer(serializers.ModelSerializer):
 
     def save(self, **kwargs):
         validated_data = dict(list(self.validated_data.items()) + list(kwargs.items()))
-        if self.instance:
+        if not self.instance:
             self.instance = self.create(validated_data)
         else:
             self.instance = self.update(self.instance, validated_data)
