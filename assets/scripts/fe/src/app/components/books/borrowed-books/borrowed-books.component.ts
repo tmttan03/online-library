@@ -7,6 +7,7 @@ import { SearchModel } from 'src/app/commons/models/search.model';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { BookDetailsComponent } from '../../partials/modals/book-details/book-details.component';
 import { ConfirmationMessageComponent } from '../../partials/modals/confirmation-message/confirmation-message.component';
+import { AuthService } from 'src/app/commons/services/auth/auth.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class BorrowedBooksComponent implements OnInit {
   all_books: any;
 
   constructor(
+    private authService: AuthService,
     private nav: NavigationService,
     private booksService: BooksService,
     private simpleModalService: SimpleModalService,
@@ -72,7 +74,7 @@ export class BorrowedBooksComponent implements OnInit {
     if (event.target.value === '') {
       this.books_list = this.all_books;
     }else{
-      this.books_list = this.all_books.filter(x => x.title.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.books_list = this.all_books.filter(x => x.book.title.toLowerCase().includes(event.target.value.toLowerCase()));
     }
   }
 

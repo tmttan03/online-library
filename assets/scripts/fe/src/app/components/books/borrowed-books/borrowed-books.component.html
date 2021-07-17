@@ -16,7 +16,7 @@
 <div class="row mb-2">
     <div class="col-sm-12">
         <div class="me-2 mb-2">
-            <div class="search-box me-2 mb-2 d-inline-block">
+            <div class="search-box chat-search-box me-2 mb-2">
                 <div class="position-relative">
                     <input type="text"
                            class="form-control"
@@ -59,10 +59,10 @@
                             <td><p class="">{{ item.book.type | titlecase }}</p></td>
                             <td><p class="">{{ item.book.location | titlecase }}</p></td>
                             <td>
-                                <p class="badge badge-pill badge-info font-size-11"  *ngIf="item.returned_date !== null"style="color: white;">
+                                <p class="badge badge-soft-info font-size-11"  *ngIf="item.returned_date !== null">
                                     Returned
                                 </p>
-                                <p class="badge badge-pill badge-danger font-size-11"  *ngIf="item.returned_date === null"style="color: white;">
+                                <p class="badge badge-soft-danger font-size-11"  *ngIf="item.returned_date === null">
                                     Checked Out
                                 </p>
                             </td>
@@ -75,15 +75,13 @@
                                 </p></td>
                             <td>
                                 <button type="button"
-                                        class="btn btn-light btn-sm mr-2"
+                                        class="btn btn-light btn-sm mr-2 mb-2"
                                         (click)="rowClicked(item.book)">View</button>
 
                                 <button type="button"
-                                        class="btn btn-secondary btn-sm"
-                                        [hidden]="item.returned_date !== null"
+                                        class="btn btn-secondary btn-sm mb-2"
+                                        [hidden]="item.returned_date !== null || item.book.owner.id===this.authService.user.id"
                                         (click)="returnBook($event, item)">Return Book</button>
-
-                                <p class="" [hidden]="item.returned_date === null">{{ item.returned_date | date:"medium" }}
                             </td>
                         </tr>
                         <tr *ngIf="books_list?.length == 0">

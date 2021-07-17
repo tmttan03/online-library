@@ -113,3 +113,8 @@ tag[_ngcontent-c3]:not(.readonly):not(.tag--editing):focus {
 .modal {
     z-index: 9999!important;
 }
+
+.table-nowrap td, .table-nowrap th {
+    white-space: pre-wrap!important;
+}
+

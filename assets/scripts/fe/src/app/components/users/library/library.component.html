@@ -39,7 +39,7 @@
                 <div class="px-4 py-3 border-top">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item me-3">
-                            <span class="badge font-size-11" 
+                            <span class="badge font-size-11"
                                 [ngClass]="{'badge-soft-info': book.status==='checked out',
                                 'badge-soft-success': book.status==='available',
                                 'badge-soft-danger': (book.status==='damaged'|| book.status==='lost')}">
@@ -53,6 +53,13 @@
                 </div>
             </div>
         </div>
+        <div class="col" *ngIf="books_list?.length == 0">
+            <div class="card h-90">
+                <div class="card-body">
+                    <h6> No Books Found! </h6>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="col-xl-3 col-lg-4">
@@ -61,31 +68,33 @@
                 <div class="search-box">
                     <p class="text-muted">Search</p>
                     <div class="position-relative">
-                        <input type="text" class="form-control rounded bg-light border-light" placeholder="Search...">
+                        <input type="text"
+                               class="form-control rounded bg-light border-light"
+                               placeholder="Search title..."
+                               (keyup)="searchTitle($event)">
                         <i class="mdi mdi-magnify search-icon"></i>
                     </div>
                 </div>
                 <hr class="my-4">
                 <div>
                     <p class="text-muted">Type</p>
-
                     <ul class="list-unstyled fw-medium">
-                        <li><a href="#" class="text-muted py-2 d-block"><i class="mdi mdi-chevron-right me-1"></i> Hardcopy</a></li>
-                        <li><a href="#" class="text-muted py-2 d-block"><i class="mdi mdi-chevron-right me-1"></i> Paperback</a></li>
-                        <li><a href="#" class="text-muted py-2 d-block"><i class="mdi mdi-chevron-right me-1"></i> Digital Copy</a></li>
+                        <li><a href="javascript:void(0);" class="text-muted py-2 d-block" (click)="filterTypeClick($event, 'all')"><i class="mdi mdi-chevron-right me-1"></i> All</a></li>
+                        <li><a href="javascript:void(0);" class="text-muted py-2 d-block" (click)="filterTypeClick($event, 'hardcopy')"><i class="mdi mdi-chevron-right me-1"></i> Hardcopy</a></li>
+                        <li><a href="javascript:void(0);" class="text-muted py-2 d-block" (click)="filterTypeClick($event, 'paperback')"><i class="mdi mdi-chevron-right me-1"></i> Paperback</a></li>
+                        <li><a href="javascript:void(0);" class="text-muted py-2 d-block" (click)="filterTypeClick($event, 'digital copy')"><i class="mdi mdi-chevron-right me-1"></i> Digital Copy</a></li>
                     </ul>
                 </div>
                 <hr class="my-4">
                 <div>
                     <p class="text-muted">Location</p>
-
                     <ul class="list-unstyled fw-medium">
-                        <li><a href="#" class="text-muted py-2 d-block"><i class="mdi mdi-chevron-right me-1"></i> Exactus Office</a></li>
-                        <li><a href="#" class="text-muted py-2 d-block"><i class="mdi mdi-chevron-right me-1"></i> Owner's Home</a></li>
-                        <li><a href="#" class="text-muted py-2 d-block"><i class="mdi mdi-chevron-right me-1"></i> In the Matrix</a></li>
+                        <li><a href="javascript:void(0);" class="text-muted py-2 d-block" (click)="filterLocationClick($event,'all')"><i class="mdi mdi-chevron-right me-1"></i> All</a></li>
+                        <li><a href="javascript:void(0);" class="text-muted py-2 d-block" (click)="filterLocationClick($event, 'exactus office')"><i class="mdi mdi-chevron-right me-1"></i> Exactus Office</a></li>
+                        <li><a href="javascript:void(0);" class="text-muted py-2 d-block" (click)="filterLocationClick($event, 'owner')"><i class="mdi mdi-chevron-right me-1"></i> Owner's Home</a></li>
+                        <li><a href="javascript:void(0);" class="text-muted py-2 d-block" (click)="filterLocationClick($event, 'in the matrix')"><i class="mdi mdi-chevron-right me-1"></i> In the Matrix</a></li>
                     </ul>
                 </div>
-
             </div>
         </div>
         <!-- end card -->

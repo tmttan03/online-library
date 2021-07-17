@@ -73,17 +73,33 @@ export class LibraryComponent implements OnInit {
     });
   }
 
-  filterClick(event, status) {
+  filterTypeClick(event, type) {
     event.preventDefault();
-    if (status === 'all') {
+    if ( type === 'all') {
       this.books_list = this.all_books;
-    } else if (status === 'digital copy') {
-      this.books_list = this.all_books.filter(x => x.is_digital_copy === true);
     } else {
-      this.books_list = this.all_books.filter(x => x.status === status);
+      this.books_list = this.all_books.filter(x => x.type === type);
     }
-
     this.form.form.controls['search_text'].setValue(null);
   }
+
+  filterLocationClick(event, location) {
+    event.preventDefault();
+    if ( location === 'all') {
+      this.books_list = this.all_books;
+    } else {
+      this.books_list = this.all_books.filter(x => x.location === location);
+    }
+    this.form.form.controls['search_text'].setValue(null);
+  }
+
+  searchTitle(event){
+    if (event.target.value === '') {
+      this.books_list = this.all_books;
+    }else{
+      this.books_list = this.all_books.filter(x => x.title.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
+  }
+
 
 }

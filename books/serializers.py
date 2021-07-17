@@ -21,15 +21,19 @@ class BookSerializer(serializers.ModelSerializer):
     owner = UserSerializer(required=False, allow_null=True, default=None)
     authors = AuthorSerializer(required=False, allow_null=True, many=True)
     thumbnail = Base64ImageField(required=False)
+    comment_count = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Book
-        fields = ('id', 'title', 'plot', 'type', 'status', 'location',
+        fields = ('id', 'title', 'plot', 'type', 'status', 'location', 'comment_count',
                   'thumbnail', 'authors', 'owner', 'date_created', 'date_updated')
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         return super(BookSerializer, self).__init__(*args, **kwargs)
+
+    def get_comment_count(self, instance):
+        return instance.comment_set.all().count()
 
     def create(self, validated_data):
         book = Book(

@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
 
   books_list: any;
   all_books: any;
+  book_of_d_day:any;
   private form: SearchForm;
 
   constructor(
@@ -53,11 +54,11 @@ export class DashboardComponent implements OnInit {
       data => {
         this.all_books = data;
         this.books_list = this.all_books;
+        this.book_of_d_day = this.books_list[Math.floor(Math.random() * this.books_list.length)];
       }, error => {
         console.log(error);
       }
     );
-
   }
 
   onSubmit({ value, valid }: { value: SearchModel, valid: boolean }) {
