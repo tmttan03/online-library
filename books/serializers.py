@@ -59,7 +59,7 @@ class BookSerializer(serializers.ModelSerializer):
             book.thumbnail=validated_data.get('thumbnail')
         book.save()
         for data in self.request.data.get('authors'):
-            author = Author.objects.get_or_create(name=data.get('value'))
+            author = Author.objects.create(name=data.get('value'))
             book.authors.add(author)
 
     def update(self, instance, validated_data):
