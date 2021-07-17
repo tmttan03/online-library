@@ -43,7 +43,7 @@ class BookViewSet(ViewSet):
         )
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-        return Response({}, status=200)
+        return Response(serializer.data, status=200)
 
 
 class AuthorViewSet(ViewSet):

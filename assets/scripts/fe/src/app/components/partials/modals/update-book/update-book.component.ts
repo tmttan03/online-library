@@ -42,7 +42,7 @@ export class UpdateBookComponent extends SimpleModalComponent<ConfirmModel, any>
 
   onSubmit({ value, valid }: { value: Books, valid: boolean }) {
     if (valid) {
-      if (this.form.form.dirty) {
+      if (this.form.form.dirty || this.hasChanges()) {
         value.authors = this.author_list;
         this.result = value;
       }
@@ -59,4 +59,16 @@ export class UpdateBookComponent extends SimpleModalComponent<ConfirmModel, any>
     }
   }
 
+  hasChanges() {
+    if(this.author_list.length === this.book.authors.length){
+      const results = this.author_list.filter(({ value: value }) => !this.book.authors.some(({ name: name }) => name === value));
+      if(results.length > 0){
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return true
+    }
+  }
 }

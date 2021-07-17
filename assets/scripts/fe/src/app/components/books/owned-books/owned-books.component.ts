@@ -94,11 +94,12 @@ export class OwnedBooksComponent implements OnInit {
                       })
                     });
 
-                    book.title = bookData.title;
-                    book.plot = bookData.plot;
-                    book.type = bookData.type;
-                    this.author_list = bookData.authors;
-                    book.location = bookData.location;
+                    book.title = Object(data).title;
+                    book.plot = Object(data).plot;
+                    book.type = Object(data).type;
+                    book.authors = Object(data).authors
+                    this.author_list = Object(data).authors;
+                    book.location = Object(data).location;
 
                   }, error => {
                     console.log(error);

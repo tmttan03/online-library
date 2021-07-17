@@ -57,6 +57,7 @@ export class AddBookComponent implements OnInit {
     // this.form.form.controls['status'].setValue('available');
     this.form.form.controls['type'].setValue('hardcover');
     this.form.form.controls['location'].setValue('exactus office');
+    this.removeImg();
   }
 
   onChangeType(){
