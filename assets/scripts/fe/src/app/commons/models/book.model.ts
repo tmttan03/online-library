@@ -12,6 +12,7 @@ export class Books {
   authors        : Author[] = [];
   owner          : User;
   date_created   : string = null;
+  thumbnail      : string = null;
 
   constructor(data={}) {
     Object.assign(this, data);

@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import Book, Author, Comment, Checkout
 from users.serializers import UserSerializer
+from drf_extra_fields.fields import Base64ImageField
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -34,6 +35,7 @@ class BookSerializer(serializers.ModelSerializer):
 
     owner = UserSerializer(required=False, allow_null=True, default=None)
     authors = AuthorSerializer(required=False, allow_null=True, many=True)
+    thumbnail = Base64ImageField(required=False)
 
     class Meta:
         model = Book
@@ -53,6 +55,8 @@ class BookSerializer(serializers.ModelSerializer):
             location=validated_data.get('location', None),
             owner=self.request.user,
         )
+        if validated_data.get('thumbnail'):
+            book.thumbnail=validated_data.get('thumbnail')
         book.save()
         for data in self.request.data.get('authors'):
             author = Author.objects.create(name=data.get('value'))

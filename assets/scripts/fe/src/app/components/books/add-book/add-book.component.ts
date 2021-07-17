@@ -17,6 +17,7 @@ export class AddBookComponent implements OnInit {
 
   private form: BookForm;
   private author_list = [];
+  private image_url;
   private default_status = 'available';
 
   constructor(
@@ -35,6 +36,8 @@ export class AddBookComponent implements OnInit {
     if (valid) {
       value.authors = this.author_list;
       value.status = this.default_status;
+      value.thumbnail=this.image_url;
+      
       this.booksService.addBook(value).subscribe(
         data => {
           this.simpleModalService.addModal(AddBookMessagesComponent, {has_error:false}).subscribe();
@@ -63,6 +66,22 @@ export class AddBookComponent implements OnInit {
       this.form.form.controls['type'].value !== 'digital copy'){
       this.form.form.controls['location'].setValue('exactus office');
     }
+  }
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event) => { 
+        this.image_url = event.target.result;
+      }
+    }
+  }
+
+  removeImg(){
+    this.image_url = null;
+    this.form.form.controls['thumbnail'].setValue(null)
   }
 
   navigationRedirect(event, route){

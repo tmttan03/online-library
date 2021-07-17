@@ -16,7 +16,8 @@ export class BookForm {
       type        : new FormControl(null, [Validators.required]),
       location    : new FormControl(null, [Validators.required]),
       status      : new FormControl(null),
-      authors     : new FormControl(null, [Validators.required]),
+      authors     : new FormControl(null),
+      thumbnail   : new FormControl(null),
     });
   }
 
