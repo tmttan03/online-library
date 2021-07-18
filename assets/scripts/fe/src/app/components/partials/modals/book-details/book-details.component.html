@@ -34,26 +34,25 @@
       <hr>
       <p>Comments <span *ngIf='comments_list'>({{ comments_list.length }}):</span></p>
 
-      <div class="comment-section" style="max-height: 125px; overflow: auto;">
-        <div class="d-flex align-items-center pt-2 pb-3 border-bottom" *ngFor="let comment of comments_list?.reverse()" >
-          <img class="img-sm rounded-circle header-profile-user" src="{{ comment.user.avatar }}" alt="profile">
-          <div class="ml-3" style="line-height: 0.5;">
-            <h6 class="mb-0">
-              <table>
-                <tr>
-                  <td class="pb-0 pt-0 font-size-12">{{ comment.user.full_name | titlecase }} </td>
-                  <td class="pb-0 pt-0"><small class="text-muted pl-2" style="font-size: 10px; margin-top: 2px;">{{ comment.date_created | date:'medium' }}</small></td>
-                  <td class="pb-0 pt-0"><p></p></td>
-                  <td class="pb-0 pt-0">
-                    <button class="close float-right" type="button" (click)="deleteClick(comment.id)" [hidden]="comment.user.id!==this.authService.user_id">&times;</button>
-                  </td>
-                </tr>
-              </table>
-            </h6>
-            <small class="text-muted mb-0">{{ comment.message }}</small> <br>
-          </div>
-        </div>
-      </div>
+      <ul class="list-group list-group-flush" style="max-height: 125px; overflow: auto;">
+        <li class="list-group-item pl-2 pr-2" *ngFor="let comment of comments_list?.reverse()">
+            <div class="media">
+              <div class="avatar-xs me-3">
+                <img src="{{ comment.user.avatar }}" alt="" class="img-fluid d-block rounded-circle" style="height: 100%;">
+              </div>
+              <div class="media-body">
+                <h5 class="font-size-14 mb-1">{{ comment.user.full_name | titlecase }} <small class="text-muted float-end">{{ comment.date_created | date:'medium' }}</small></h5>
+                <p class="text-muted"> {{ comment.message }}
+                  <small class="text-muted float-end"
+                        [hidden]="comment.user.id!==this.authService.user_id"
+                        (click)="deleteClick(comment.id)">
+                        <i class="bx bx-x font-size-15"></i>
+                  </small>
+                </p>
+              </div>
+            </div>
+        </li>
+      </ul>
     </div>
 
     <form class="form-group" [formGroup]="form.form" (ngSubmit)="onSubmit(form.form)" [hidden]="book.status === 'lost' || book.status === 'damaged' ">

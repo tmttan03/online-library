@@ -118,3 +118,8 @@ tag[_ngcontent-c3]:not(.readonly):not(.tag--editing):focus {
     white-space: pre-wrap!important;
 }
 
+.dropdown-th{
+    text-decoration:none;
+    color:black;
+    font-weight: 600;
+}

@@ -64,8 +64,10 @@ export class BorrowedBooksComponent implements OnInit {
     event.preventDefault();
     if (status === 'all') {
       this.books_list = this.all_books;
-    } else {
-      this.books_list = this.all_books.filter(x => x.book.status === status);
+    } else if(status == 'returned') {
+      this.books_list = this.all_books.filter(x => x.returned_date !== null);
+    }else{
+      this.books_list = this.all_books.filter(x => x.returned_date === null);
     }
     this.form.form.controls['search_text'].setValue(null);
   }

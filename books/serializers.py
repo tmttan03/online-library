@@ -33,7 +33,7 @@ class BookSerializer(serializers.ModelSerializer):
         return super(BookSerializer, self).__init__(*args, **kwargs)
 
     def get_comment_count(self, instance):
-        return instance.comment_set.all().count()
+        return instance.comment_set.filter(is_deleted=False).count()
 
     def create(self, validated_data):
         book = Book(
