@@ -31,12 +31,12 @@ pip install -r requirements.txt
 
 3. Migrate the files with
 ```
-$ python manage.py migrate
+python manage.py migrate
 ```
 
 4. Load initial data
 ```
-$ python manage.py loaddata core/fixtures/initial_data.json
+python manage.py loaddata core/fixtures/initial_data.json
 ```
 
 5. Run server
@@ -46,7 +46,7 @@ $ python manage.py runserver
 
 6. Build to build frontend assets
 ```
-$ cd <DIRECTORY>/online-library/assets/scripts/fe
-$ npm install
-$ ng build --watch
+cd ../assets/scripts/fe
+npm install
+ng build --watch
 ```
